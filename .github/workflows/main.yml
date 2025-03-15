@@ -1,0 +1,23 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    container: python:3.9-slim-buster  # Equivalent to image: python:3.9-slim-buster
+
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update && apt-get install -y make
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Fetches your repository code
+
+      - name: Run Tests
+        run: make test  # Executes the `make test` command
